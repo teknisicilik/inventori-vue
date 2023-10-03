@@ -13,7 +13,7 @@ export default {
         setter: "barang",
         // pk_field: 'area_name',
         permission: {
-          create: "template-allow-all",
+          create: "tempate-allow-all",
           read: "template-allow-all",
           update: "template-allow-all",
           delete: "template-allow-all"

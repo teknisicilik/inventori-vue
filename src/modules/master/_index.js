@@ -19,6 +19,13 @@ const module = {
       icon: "ri-stack-line",
       path: "/barang",
       component: () => import("./barang/barang.vue")
+    },
+    {
+      name: "pelanggan",
+      label: "Data Pelanggan",
+      icon: "ri-stack-line",
+      path: "/pelanggan",
+      component: () => import("./pelanggan/pelanggan.vue")
     }
   ]
 }

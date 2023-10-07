@@ -1,4 +1,5 @@
 const moduleOrder = [
-  "master"
+  "master",
+  "pemasukan"
 ]
 export default moduleOrder

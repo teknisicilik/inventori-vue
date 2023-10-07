@@ -1,55 +1,47 @@
 <template>
-  <tas-base-crud :config="config"></tas-base-crud>
+  <tas-base-crud :config="config">
+  </tas-base-crud>
 </template>
 <script>
 export default {
-  name: "crud-barang",
+  name: "crud-pemasukan-detail",
   data () {
     return {
       config: {
-        title: "Barang",
-        model_api: "barang",
-        getter: "barang",
-        setter: "barang",
+        title: "Detail Pemasukan",
+        model_api: "pemasukan_detail",
+        getter: "pemasukan_detail",
+        setter: "pemasukan_detail",
         // pk_field: 'area_name',
         permission: {
-          create: "template-allow-all",
+          create: false,
           read: "template-allow-all",
-          update: "template-allow-all",
-          delete: "template-allow-all"
+          update: false,
+          delete: false
         },
         fields: [
           {
-            id: 'kategori_barang_id',
-            label: 'Kategori Barang',
+            id: 'pemasukan_id',
+            label: 'No Pemasukan',
             methods: {
-              list: { view_data: 'rel_kategori_barang_id' },
-              create: {
-                setter: 'kategori_barang',
-                getter: 'kategori_barang',
-                type: 'lookup-radio',
-                validation: ['required'],
-                option: {
-                  list_pointer: {
-                    label: 'nama', code: 'id', display: ['nama']
-                  }
-                }
-              },
-              update: {
-                setter: 'kategori_barang',
-                getter: 'kategori_barang',
-                type: 'lookup-radio',
-                validation: ['required'],
-                option: {
-                  list_pointer: {
-                    label: 'nama', code: 'id', display: ['nama']
-                  }
-                }
-              },
-              detail: { view_data: 'rel_kategori_barang_id' }
+              list: { view_data: 'rel_pemasukan' },
+              create: false,
+              update: false,
+              detail: {view_data: 'rel_pemasukan'}
             }
           },
-          // ===================
+          {
+            id: 'barang_id',
+            label: 'barang',
+            methods: {
+              list: { view_data: 'rel_barang' },
+              create: false,
+              update: false,
+              detail: {view_data: 'rel_barang'}
+            }
+          },
+          { id: 'jumlah', label: 'Jumlah', methods: { list: { view_data: 'jumlah' }, create: false, update: false, detail: { view_data: 'jumlah' }, filter: { type: 'number' } } },
+          { id: 'total_nilai', label: 'Total Nilai', methods: { list: { view_data: 'total_nilai' }, detail: { view_data: 'total_nilai' }, create: false, update: false, filter: { type: 'number' } } },
           {
             id: "id",
             methods: {

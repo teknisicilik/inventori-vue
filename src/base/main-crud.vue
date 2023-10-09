@@ -21,10 +21,15 @@
       </div>
       <div id="detail" ref="detail" class="animated" v-if="activeView === 'detail'">
         <slot name="detail-header"></slot>
-        <tas-base-detail :isBodySlot="!!$scopedSlots['detail-body']" :isSideSlot="!!$scopedSlots['detail-side-right-body'] || !!$scopedSlots['detail-side-left-body']" :isCustomAPI="config.custom_api? !!config.custom_api.read : false" @zoom="getEvent('zoom', $event)" @back="getEvent('list')" :key="config.title+'-detail'" :id="activeID" :slave="config.slave" :permission="permission" :title="config.title" :API="configAPI.read" :fields="fields.detail" :export="config.export">
+        <tas-base-detail :isBodySlot="!!$scopedSlots['detail-body']" :isBodySlotWithData="!!$scopedSlots['detail-body-data']" :isSideSlot="!!$scopedSlots['detail-side-right-body'] || !!$scopedSlots['detail-side-left-body']" :isCustomAPI="config.custom_api? !!config.custom_api.read : false" @zoom="getEvent('zoom', $event)" @back="getEvent('list')" :key="config.title+'-detail'" :id="activeID" :slave="config.slave" :permission="permission" :title="config.title" :API="configAPI.read" :fields="fields.detail" :export="config.export">
           <template v-slot:detail-body>
             <slot name="detail-body" v-bind:id="activeID"></slot>
           </template>
+
+          <template v-slot:detail-body-data="rowData">
+            <slot name="detail-body-data" v-bind:rowData="rowData.rowData"></slot>
+          </template>
+
           <template v-slot:detail-side-right-body="rowData">
             <slot name="detail-side-right-body" v-bind:rowData="rowData.rowData"></slot>
           </template>

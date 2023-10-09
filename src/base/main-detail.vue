@@ -1,6 +1,7 @@
 <template>
   <div class="detail-wrapper">
     <slot v-if="isBodySlot" name="detail-body" />
+    <slot v-if="isBodySlotWithData" name="detail-body-data" v-bind:rowData="realData"/>
     <template v-else>
       <div class="d-flex mb-5">
         <slot name="detail-side-left-body" v-bind:rowData="realData" />
@@ -161,6 +162,7 @@ export default {
     slave: { type: Array, required: false },
     id: { type: Number, required: true },
     isBodySlot: { required: true },
+    isBodySlotWithData: { required: true },
     isSideSlot: { required: true },
     isCustomAPI: { type: Boolean, required: false, default () { return false } }
   },

@@ -1,13 +1,16 @@
 <template>
   <tas-base-crud :config="config">
-    <template v-slot:list-footer>
-      <p>INI SLOT LIST PEMASUKAN DETAIL FOOTER</p>
+    <template #create-form>
+      <FormDetail :config="config"></FormDetail>
     </template>
   </tas-base-crud>
 </template>
 <script>
 export default {
   name: "crud-pemasukan-detail",
+  components: {
+    FormDetail: () => import('./form-detail.vue')
+  },
   data () {
     return {
       config: {
@@ -17,27 +20,50 @@ export default {
         setter: "pemasukan_detail",
         // pk_field: 'area_name',
         permission: {
-          create: "template-allow-all",
+          create: false,
           read: "template-allow-all",
           update: false,
           delete: false
         },
+        // slave: [
+        //   {
+        //     name: "Kode Group",
+        //     permission: "template-allow-all",
+        //     module: "kode-group/kode-group",
+        //     as_param: "pemasukan_detail_id",
+        //     key_field: "id",
+        //     overwrite: {
+        //       fields: [
+        //         { rule: "1.methods.list", value: false },
+        //         { rule: "1.methods.filter", value: false },
+        //         { rule: "1.methods.create", value: false },
+        //         { rule: "1.methods.update", value: false },
+        //         { rule: "1.methods.detail", value: false }
+        //       ],
+        //       permission: {
+        //         create: "template-allow-all",
+        //         read: "template-allow-all",
+        //         update: false,
+        //         delete: false
+        //       }
+        //     }
+        //   }
+        // ],
         fields: [
           {
             id: 'pemasukan_id',
-            label: 'No Pemasukan',
             methods: {
-              list: { view_data: 'rel_pemasukan' },
+              list: false,
               create: false,
               update: false,
-              detail: {view_data: 'rel_pemasukan'}
+              detail: false
             }
           },
           {
             id: 'barang_id',
             label: 'barang',
             methods: {
-              list: { view_data: 'rel_barang' },
+              list: { view_data: 'rel_barang_id' },
               create: {
                 setter: "barang",
                 getter: "barang",
@@ -52,11 +78,11 @@ export default {
                 }
               },
               update: false,
-              detail: {view_data: 'rel_barang'}
+              detail: {view_data: 'rel_barang_id'}
             }
           },
-          { id: 'jumlah', label: 'Jumlah', methods: { list: { view_data: 'jumlah' }, create: true, update: false, detail: { view_data: 'jumlah' }, filter: { type: 'number' } } },
-          { id: 'total_nilai', label: 'Total Nilai', methods: { list: { view_data: 'total_nilai' }, detail: { view_data: 'total_nilai' }, create: true, update: false, filter: { type: 'number' } } },
+          { id: 'jumlah', label: 'Jumlah', methods: { list: { view_data: 'jumlah' }, create: {type: 'number', validation: ["required"]}, update: false, detail: { view_data: 'jumlah' }, filter: { type: 'number' } } },
+          { id: 'total_nilai', label: 'Total Nilai', methods: { list: { view_data: 'total_nilai' }, detail: { view_data: 'total_nilai' }, create: {type: 'number', validation: ["required"]}, update: false, filter: { type: 'number' } } },
           {
             id: "id",
             methods: {

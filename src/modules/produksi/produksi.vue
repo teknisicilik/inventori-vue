@@ -1,8 +1,6 @@
 <template>
   <tas-base-crud :config="config">
-    <template #list-table-action="rowData">
-      <button @click="batal(rowData)" class="btn btn-danger btn-sm mr-1">Batalkan</button>
-    </template>
+    <template #list-kode_group_id="rowData">{{ getBarang }}</template>
   </tas-base-crud>
 </template>
 
@@ -11,22 +9,22 @@ export default {
   data () {
     return {
       config: {
-        title: "Pemasukan Barang",
-        model_api: "pemasukan",
-        getter: "pemasukan",
-        setter: "pemasukan",
+        title: "Produksi Barang",
+        model_api: "produksi",
+        getter: "produksi",
+        setter: "produksi",
         permission: {
           create: "template-allow-all",
           read: "template-allow-all",
-          update: false,
-          delete: false
+          update: "template-allow-all",
+          delete: "template-allow-all"
         },
         slave: [
           {
-            name: "Detail  Pemasukan",
+            name: "Detail produksi Barang",
             permission: "template-allow-all",
-            module: "pemasukan/pemasukan-detail",
-            as_param: "pemasukan_id",
+            module: "produksi/produksi-detail",
+            as_param: "produksi_id",
             key_field: "id",
             overwrite: {
               fields: [
@@ -39,20 +37,16 @@ export default {
               permission: {
                 create: "template-allow-all",
                 read: "template-allow-all",
-                update: false,
+                update: "template-allow-all",
                 delete: "template-allow-all"
               }
             }
           }
         ],
         fields: [
-          { id: 'no_pembelian', label: 'No Pemasukan', methods: { list: true, create: { type: 'text', validation: ['required'] }, update: { validation: ['required'] }, detail: true } },
-          { id: 'tgl_pembelian', label: 'Tgl Pemasukan', methods: { list: true, create: { type: 'date', validation: ['required'] }, update: { type: 'date', validation: ['required'] }, detail: true } },
-          { id: 'pelanggan_id', label: 'Pelanggan', methods: { list: {view_data: 'rel_pelanggan_id'}, create: { type: 'lookup-radio', setter: 'pelanggan', getter: 'pelanggan', validation: ['required'], option: { list_pointer: {label: 'Pelanggan', code: 'id', display: ['nama']} } }, update: { type: 'lookup-radio', validation: ['required'], setter: 'pelanggan', getter: 'pelanggan', option: { list_pointer: {label: 'Pelanggan', code: 'id', display: ['nama']} } }, detail: {view_data: 'rel_pelanggan_id'} } },
-          { id: 'no_dokumen', label: 'No Dokumen', methods: { list: true, create: { type: 'text', validation: ['required'] }, update: { validation: ['required'] }, detail: true } },
-          { id: 'tipe_dokumen', label: 'Tipe Dokumen', methods: { list: true, create: { type: 'text', validation: ['required'] }, update: { validation: ['required'] }, detail: true } },
-          { id: 'no_invoice', label: 'No Invoice', methods: { list: true, create: { type: 'text', validation: ['required'] }, update: { validation: ['required'] }, detail: true } },
-          { id: 'kurs', label: 'Kurs', methods: { list: true, create: { type: 'text', validation: ['required'] }, update: { validation: ['required'] }, detail: true } },
+          { id: 'no_produksi', label: 'No Produksi', methods: { list: true, create: { type: 'text', validation: ['required'] }, update: { validation: ['required'] }, detail: true } },
+          { id: 'tgl_produksi', label: 'Tgl Produksi', methods: { list: true, create: { type: 'date', validation: ['required'] }, update: { type: 'date', validation: ['required'] }, detail: true } },
+          { id: 'kode_group_id', label: 'Kode Bahan', methods: { list: false, create: { type: 'lookup-radio', setter: 'kode-group', getter: 'kode-group', validation: ['required'], option: { list_pointer: {label: 'Kode Group', code: 'id', display: ['rel_barang_id', 'name']} } }, update: { type: 'lookup-radio', setter: 'kode-group', getter: 'kode-group', validation: ['required'], option: { list_pointer: {label: 'Kode Group', code: 'id', display: ['name']} } }, detail: false } },
           // ===================
           {
             id: "id",
@@ -107,11 +101,6 @@ export default {
         ]
       }
     }
-  },
-  methods: {
-    batal (data) {
-      console.log(data)
-    }
-  },
+  }
 }
 </script>

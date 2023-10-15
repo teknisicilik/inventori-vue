@@ -1,7 +1,7 @@
 const module = {
   config: {
     name: "Data Master",
-    icon: "ri-shield-star-line",
+    icon: "ri-archive-line",
     desc: "Konfigurasi master data untuk transaksi",
     layout: true
   },
@@ -26,6 +26,13 @@ const module = {
       icon: "ri-stack-line",
       path: "/pelanggan",
       component: () => import("./pelanggan/pelanggan.vue")
+    },
+    {
+      name: "kode-group",
+      label: "Kode Group",
+      icon: "ri-stack-line",
+      path: "/kode-group",
+      component: () => import("./kode-group/kode-group.vue")
     }
   ]
 }

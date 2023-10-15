@@ -1,7 +1,7 @@
 const module = {
   config: {
-    name: "Data Pemasukan",
-    icon: "ri-shield-star-line",
+    name: "Pemasukan Barang",
+    icon: "ri-inbox-archive-line",
     desc: "Konfigurasi Data Pemasukan Barang",
     layout: true
   },
@@ -15,7 +15,7 @@ const module = {
     },
     {
       name: "pemasukan detail",
-      label: "Pemasukan Detail",
+      label: "Detail Pemasukan",
       icon: "ri-stack-line",
       path: "/pemasukan-detail",
       component: () => import("./pemasukan-detail.vue")

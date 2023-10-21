@@ -15,7 +15,7 @@ export default {
         permission: {
           create: false,
           read: 'template-allow-all',
-          update: false,
+          update: 'template-allow-all',
           delete: false
         },
         fields: [

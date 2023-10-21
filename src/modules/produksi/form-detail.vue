@@ -35,7 +35,6 @@
                   <button class="btn btn-info">Simpan</button>
                 </form>
               </ValidationObserver>
-              {{ formData }}
             </div>
           </div>
         </div>
@@ -57,37 +56,37 @@ export default {
     st () {
       console.log(this.$store)
     },
-    putKodeGroup () {
-      // let data = {
-      //   id: this.$store.state.activeSlave.key,
-      //   stok_akhir: 0,
-      //   nilai_akhir: 0
-      // }
-      let data = ''
-      this.$_api.dataset('produksi', {limit: 10, id: this.$store.state.activeSlave.key}).then(res => {
-        if (res) {
-          this.$_api.dataset('kode-group', {limit: 10, id: res.data[0].kode_group_id}).then(response => {
-            data = response.data[0]
-            data.stok_akhir = response.data[0].stok_akhir - this.formData.jumlah
-            data.nilai_akhir = (response.data[0].nilai_akhir / response.data[0].stok_akhir) * this.formData.jumlah
-            if (response) {
-              this.$_api.update('kode-group', data).then(result => {
-                if (result) {
-                  this.$_alert.success(null, 'Data ' + this.config.title + ' berhasil ditambahkan')
-                  this.$router.go()
-                }
-              })
-            }
-          })
-        }
-      })
-    },
-    detailSubmit () {
-      let isValid = this.$refs.mainForm.validate()
+    // putKodeGroup () {
+    //   // let data = {
+    //   //   id: this.$store.state.activeSlave.key,
+    //   //   stok_akhir: 0,
+    //   //   nilai_akhir: 0
+    //   // }
+    //   let data = ''
+    //   this.$_api.dataset('produksi', {limit: 10, id: this.$store.state.activeSlave.key}).then(res => {
+    //     if (res) {
+    //       this.$_api.dataset('kode-group', {limit: 10, id: res.data[0].kode_group_id}).then(response => {
+    //         data = response.data[0]
+    //         data.stok_akhir = response.data[0].stok_akhir - this.formData.jumlah
+    //         data.nilai_akhir = (response.data[0].nilai_akhir / response.data[0].stok_akhir) * this.formData.jumlah
+    //         if (response) {
+    //           this.$_api.update('kode-group', data).then(result => {
+    //             if (result) {
+    //               this.$_alert.success(null, 'Data ' + this.config.title + ' berhasil ditambahkan')
+    //               this.$router.go()
+    //             }
+    //           })
+    //         }
+    //       })
+    //     }
+    //   })
+    // },
+    async detailSubmit () {
+      let isValid = await this.$refs.mainForm.validate()
       if (isValid) {
         this.$_api.create('produksi-detail', this.formData).then(res => {
           if (res) {
-            this.putKodeGroup()
+            this.$router.go()
           }
         })
       }

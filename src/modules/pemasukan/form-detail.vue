@@ -56,26 +56,26 @@ export default {
     st () {
       console.log(this.$store)
     },
-    postKodeGroup () {
-      let data = {
-        name: this.formData.pemasukan_id,
-        barang_id: this.formData.barang_id,
-        stok_akhir: this.formData.jumlah,
-        nilai_akhir: this.formData.total_nilai
-      }
-      this.$_api.create('kode_group', data).then(res => {
-        if (res) {
-          this.$_alert.success(null, 'Data ' + this.config.title + ' berhasil ditambahkan')
-          this.$router.go()
-        }
-      })
-    },
+    // postKodeGroup () {
+    //   let data = {
+    //     name: this.formData.pemasukan_id,
+    //     barang_id: this.formData.barang_id,
+    //     stok_akhir: this.formData.jumlah,
+    //     nilai_akhir: this.formData.total_nilai
+    //   }
+    //   this.$_api.create('kode_group', data).then(res => {
+    //     if (res) {
+    //       this.$_alert.success(null, 'Data ' + this.config.title + ' berhasil ditambahkan')
+    //       this.$router.go()
+    //     }
+    //   })
+    // },
     detailSubmit () {
       let isValid = this.$refs.mainForm.validate()
       if (isValid) {
         this.$_api.create('pemasukan_detail', this.formData).then(res => {
           if (res) {
-            this.postKodeGroup()
+            this.$router.go()
           }
         })
       }

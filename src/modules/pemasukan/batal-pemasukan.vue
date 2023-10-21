@@ -12,21 +12,21 @@ export default {
     return {
       detail: '',
       config: {
-        title: "Pemasukan Barang",
-        model_api: "pemasukan",
-        getter: "pemasukan",
-        setter: "pemasukan",
+        title: "Pemasukan Dibatalkan",
+        model_api: "batal-pemasukan",
+        getter: "batal-pemasukan",
+        setter: "batal-pemasukan",
         permission: {
-          create: "template-allow-all",
+          create: false,
           read: "template-allow-all",
           update: false,
           delete: false
         },
         slave: [
           {
-            name: "Detail  Pemasukan",
+            name: "Detail Pemasukan",
             permission: "template-allow-all",
-            module: "pemasukan/pemasukan-detail",
+            module: "pemasukan/batal-detail",
             as_param: "pemasukan_id",
             key_field: "id",
             overwrite: {
@@ -38,17 +38,16 @@ export default {
                 { rule: "1.methods.detail", value: false }
               ],
               permission: {
-                create: "template-allow-all",
+                create: false,
                 read: "template-allow-all",
                 update: false,
-                delete: "template-allow-all"
+                delete: false
               }
             }
           }
         ],
         fields: [
           { id: 'supplier_id', label: 'Supplier', methods: { list: {view_data: 'rel_supplier_id'}, create: { type: 'lookup-radio', setter: 'supplier', getter: 'supplier', validation: ['required'], option: { list_pointer: {label: 'Supplier', code: 'id', display: ['nama']} } }, update: { type: 'lookup-radio', validation: ['required'], setter: 'supplier', getter: 'supplier', option: { list_pointer: {label: 'Supplier', code: 'id', display: ['nama']} } }, detail: {view_data: 'rel_supplier_id'} } },
-          { id: 'tgl_pembelian', label: 'Tgl Pemasukan', methods: { list: true, create: { type: 'date' }, update: { type: 'date' }, detail: true } },
           // ===================
           {
             id: "id",
@@ -102,29 +101,6 @@ export default {
           }
         ]
       }
-    }
-  },
-  methods: {
-    async getDetail (param) {
-      this.detail = await this.$_api.list('pemasukan_detail', {limit: 10, pemasukan_id: param.id}).then(res => { return res.data })
-      this.batal(param)
-    },
-    batal (param) {
-      this.$_alert.confirm('Batalkan Pemasukan ?', 'Data yang dibatalkan tidak dapat dikembalikan, lanjutkan ?').then((result) => {
-        if (result.isConfirmed) {
-          for (let i = 0; i < this.detail.length; i++) {
-            this.$_api.create('batal_pemasukan_detail', this.detail[i])
-            this.$_api.delete('pemasukan_detail', {data: this.detail[i]})
-          }
-          this.$_api.create('batal_pemasukan', param)
-          this.$_api.delete('pemasukan', {data: param}).then(res => {
-            if (res) {
-              this.$_alert.success(null, 'Data Berhasil dibatalkan')
-              this.$router.go()
-            }
-          })
-        }
-      })
     }
   }
 }

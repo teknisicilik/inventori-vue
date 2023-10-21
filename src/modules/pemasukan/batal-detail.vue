@@ -7,17 +7,14 @@
 </template>
 <script>
 export default {
-  name: "crud-pemasukan-detail",
-  components: {
-    FormDetail: () => import('./form-detail.vue')
-  },
+  name: "crud-batal-pemasukan-detail",
   data () {
     return {
       config: {
         title: "Detail Pemasukan",
-        model_api: "pemasukan_detail",
-        getter: "pemasukan_detail",
-        setter: "pemasukan_detail",
+        model_api: "batal-pemasukan-detail",
+        getter: "batal-pemasukan-detail",
+        setter: "batal-pemasukan-detail",
         // pk_field: 'area_name',
         permission: {
           create: false,
@@ -51,15 +48,6 @@ export default {
         // ],
         fields: [
           {
-            id: 'pemasukan_id',
-            methods: {
-              list: false,
-              create: false,
-              update: false,
-              detail: false
-            }
-          },
-          {
             id: 'barang_id',
             label: 'barang',
             methods: {
@@ -81,8 +69,6 @@ export default {
               detail: {view_data: 'rel_barang_id'}
             }
           },
-          { id: 'jumlah', label: 'Jumlah', methods: { list: { view_data: 'jumlah' }, create: {type: 'number', validation: ["required"]}, update: false, detail: { view_data: 'jumlah' }, filter: { type: 'number' } } },
-          { id: 'total_nilai', label: 'Total Nilai', methods: { list: { view_data: 'total_nilai' }, detail: { view_data: 'total_nilai' }, create: {type: 'number', validation: ["required"]}, update: false, filter: { type: 'number' } } },
           {
             id: "id",
             methods: {

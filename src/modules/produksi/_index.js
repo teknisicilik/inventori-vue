@@ -19,7 +19,21 @@ const module = {
       icon: "ri-stack-line",
       path: "/produksi-detail",
       component: () => import("./produksi-detail.vue")
+    },
+    {
+      name: "batal produksi",
+      label: "Produksi Dibatalkan",
+      icon: "ri-stack-line",
+      path: "/batal-produksi",
+      component: () => import("./batal-produksi.vue")
     }
+    // {
+    //   name: "batal produksi detail",
+    //   label: "Detail Produksi Dibatalkan",
+    //   icon: "ri-stack-line",
+    //   path: "/batal-detail",
+    //   component: () => import("./batal-detail.vue")
+    // }
   ]
 }
 export default module

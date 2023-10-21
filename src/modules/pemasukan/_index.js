@@ -19,6 +19,13 @@ const module = {
       icon: "ri-stack-line",
       path: "/pemasukan-detail",
       component: () => import("./pemasukan-detail.vue")
+    },
+    {
+      name: "pemasukan dibatalkan",
+      label: "Pemasukan Dibatalkan",
+      icon: "ri-stack-line",
+      path: "/batal-pemasukan",
+      component: () => import("./batal-pemasukan.vue")
     }
   ]
 }
